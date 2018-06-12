@@ -1,0 +1,34 @@
+NAME: Dinkar Khattar
+EMAIL: dinkarkhattar@ucla.edu
+ID: 204818138
+
+lab1a.c:
+
+this contains the implementation of the program in accordance to the spec.
+Without any arguments, it reads input from the keyboard and outputs to STDOUT
+With the shell argument, it passes input/output between the terminal and a shell
+that is running /bin/bash
+I added a debug argument to help me debug and navigate through the program
+
+Makefile:
+
+It contains 3 targets:
+
+default: builds the program lab1a.c with appropriate flags
+clean: deletes the file created by dist and default
+dist: creates a tarball for distribution
+
+README:
+
+The README contains descriptions for all the files and the sources
+I used.
+
+Sources:
+
+man pages for: fork(2), waitpid(2), exec(3), pipe(2), kill(3), poll(2)
+http://faculty.cs.niu.edu/~hutchins/csci480/pipeexample.htm
+https://www.gnu.org/software/libc/manual/html_node/Noncanon-Example.html
+http://tldp.org/HOWTO/Serial-Programming-HOWTO/x115.html
+https://linux.die.net/man/1/gdb
+https://www.unix.com/shell-programming-and-scripting/155000-how-use-poll-i-o-multiplex.html
+http://www.linux-mag.com/id/357

@@ -1,0 +1,33 @@
+NAME: Dinkar Khattar
+EMAIL: dinkarkhattar@ucla.edu
+ID: 204818138
+
+lab4b.c:
+
+Contains my implementation for the program and a dummy definition incase a
+beaglebone isn't connected.
+
+Makefile:
+
+This contains targets to compile, check, clean, and create a
+tarball.
+It compiles the source code uses GCC with appropriate flags.
+The check target cleans, compiles and checks the executable.
+The dist target creates a tarball with the source code, the Makefile
+and the screenshots.
+The check target runs 5 simple smoke tests that check the basic
+functionality of the compiled file.
+The testing done for this program was very simple. I did not test
+it too rigorously with any corner cases.
+The checks I included are:
+
+README:
+
+The README contains descriptions for all the files and the sources
+I used.
+
+Sources:
+
+https://drive.google.com/drive/folders/0B6dyEb8VXZo-N3hVcVI0UFpWSVk
+http://derekmolloy.ie/gpios-on-the-beaglebone-black-using-device-tree-overlays/
+https://www.tutorialspoint.com/c_standard_library/c_function_localtime.htm

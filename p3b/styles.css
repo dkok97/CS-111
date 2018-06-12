@@ -1,0 +1,14 @@
+body {
+  padding: 80px;
+  color: white;
+  background-color: black;
+  font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
+}
+
+h1,h2 {
+  color: orange
+}
+
+a {
+  color: white;
+}

@@ -1,0 +1,79 @@
+NAME: Dinkar Khattar
+EMAIL: dinkarkhattar@ucla.edu
+ID: 204818138
+
+lab0.c:
+
+This is the source code for the implementation of the project.
+The main aim of this program is copy the contents of the file with
+file descriptor 0 to the file with file descriptor 1.
+The code uses getopt_long to accept and parse CLI arguments.
+It accepts an input file and output file that replace stdin and stdout
+at file descriptor 0 and 1 respectively using close and dup, if provided.
+It also accepts arguments for triggering a segmentation fault
+and for calling a signal handler for SIGSEGV.
+The program exits with 0 if it is successful, otherwise it exits
+with exit code 1, 2, 3, or 4 depending on the error.
+
+Makefile:
+
+This contains targets to compile, check, clean, and create a
+tarball.
+It compiles the source code uses GCC with appropriate flags.
+The check target cleans, compiles and checks the executable.
+The dist target creates a tarball with the source code, the Makefile
+and the screenshots.
+The check target runs 5 simple smoke tests that check the basic
+functionality of the compiled file.
+The testing done for this program was very simple. I did not test
+it too rigorously with any corner cases.
+The checks I included are:
+
+-copyFromIntoOut: This is a simple test that confirms that the
+                  content from the specified input file is copied to
+                  the specified output file and the program exits
+                  with exit code 0.
+
+-inputErrorTest:  This test checks that the code exits with exit code
+                  2 when there is an error reading from the input file.
+
+-outputErrorTest: This test checks that the code exits with exit code
+                  3 when there is an error writing to the output file.
+
+-incorrectUsageTest: This test checks that the code exits with exit code
+                     1 if the usage is incorrect, in this case, an
+                     unrecognized argument is provided.
+
+-catchTest: This test checks that the code exits with exit code
+            4 when the signal handler is invoked with SIGSEGV.
+
+I picked these 5 tests because they cover all the ways the program
+could exit.
+
+backtrace.png:
+
+This is a screenshot showing the backtrace when the segmentation fault
+was triggered in the program using gdb.
+Since I implemented this in the main function, that is the only routine
+in the backtrace.
+
+breakpoint.png:
+
+This is a screenshot showing the value of the pointer that was used
+to create the segmentation fault, which is NULL, as expected.
+The program was run using gdb and a breakpoint was set on the line
+that caused the segmentation fault.
+
+README:
+
+The README contains descriptions for all the files and the sources
+I used. It also contains other information like limitations and errors
+that is important to this project.
+
+Sources:
+
+http://man7.org/linux/man-pages/man3/strerror.3.html (strerror man page)
+https://linux.die.net/man/2/open (open man page)
+https://linux.die.net/man/2/read (read man page)
+https://linux.die.net/man/2/write (write man page)
+https://www.gnu.org/software/make/manual/make.html (GNU make)

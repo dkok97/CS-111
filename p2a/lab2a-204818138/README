@@ -1,0 +1,136 @@
+NAME: Dinkar Khattar
+EMAIL: dinkarkhattar@ucla.edu
+ID: 204818138
+
+Question 2.1.1 - causing conflicts:
+
+-For testing my program, I started with a single thread, and then increased the
+number of threads by factors of 2, while also increasing the number of Iterations
+for each thread. We know that there are no race conditions for a single thread
+since it is not competing with any other thread for the data in memory. If there
+are a small number of iterations, each thread spends only a little time executing
+the thread function, so this reduces the probability that two threads run into
+any race conditions. With an increase in the number of iterations, the probability
+that thread conditions run into race conditions in the thread function, so the
+errors are more prominent with large number of iterations.
+-With a smaller number of iterations, each thread executes the thread function
+(add) for a small amount of time, and enters the critical section less often.
+This reduces the chances of errors due to race conditions and the result seldom
+fails.
+
+QUESTION 2.1.2 - cost of yielding:
+
+-The --yield option enables the call to sched_yield(). This function stops the
+execution of the current thread and starts the execution of another thread using
+a context switch. Context switches are expensive since the current thread's state
+is saved and changes from running to ready, the next thread's state is loaded and
+it's state is changed from ready to running. We later make another context switch
+to complete execution of the initial thread, and change it's state again.
+-These context switches result in a lot of time overhead, so the additional time
+is going to perform these context switches.
+-We do not get valid per-operation timings when context switched are involved since
+a chunk of the total time also includes the added overhead due to context switches.
+-The only way we could get the valid per-operation time is if we can subtract/ignore
+the time taken by the context switches (each call to sched_yield). I don't think
+this is possible, since it isn't known how the scheduler behaves when performing
+the appropriate operations for the context switches.
+
+QUESTION 2.1.3 - measurement errors:
+
+-The total time is dependent on the time taken for thread creations, as well as
+the total number of iterations. So as the number of iterations increase, the majority
+of the total time is taken up by the iterations, and thread creation is only a
+fraction of that time. So this seems like the cost per operation is decreasing.
+-The more the number of iterations, the closer we are to a "correct cost per operations.
+This is because, if we have a large number of iterations, the cost of thread
+creation is minimal and can be ignored, and our time will be closest to a
+"correcet" cost.
+
+QUESTION 2.1.4 - costs of serialization:
+
+-If we are using a multi-core system, the small no. of threads can run simultaneously
+on each core and don't need to use the synchronization mechanism often.
+Also, since there are only a small number of threads, there is less of a chance
+for a critical section to be occupied. The lock on the critical section is more
+readily availible than it would be for a large number of threads. For these two
+reasons, the synchronization mechanism does not come into play a lot when the
+number of threads are small.
+-As the number of threads increases, the need for a critical section increases.
+More threads will be waiting in line to execute the critical section, and due
+to this, the synchronization mechanisms will have to do more work.
+
+QUESTION 2.2.1 - scalability of Mutex:
+
+-For the add operation, the time per operation vs threads has a steady increase
+(initially sharp), and then levels out to a smaller positive increase. On the
+other hand, for the list operation, the time per operation vs threads has a small
+positive increase, but is roughly constant.
+-The graphs support the explanation above. The graph for add has a large positive
+slope initially, and then flattens out. The graph for list has a slightly positive
+small slope.
+-Since add has a small critical section, the overhead associated with each thread
+is low. However, we reach a saturation point when we increase the number of threads.
+This is because the overhead due to synchronization increases, and there are many
+threads wanting to execute a critical section. On the other hand, the critical
+section for list performs many operations, so there is a lot of overhead associated
+with each thread. So in this case, the mutex doesn't help as much.
+
+QUESTION 2.2.2 - scalability of spin locks:
+
+-For both add and list, spin locks perform worse than mutex for a large number
+of threads. This is because there are many threads spinning waiting to execute
+a critical section, and so this operation has a large overhead. Therefore, there
+is a sharp increase in the  time per operation for spin locks as compared to mutex.
+-In general, the increase in the graph of time per operation vs thread is roughly
+linear for both add and list. However, the slope for spin locks gets sharper as
+the number of threads increase, since spin locks have a large overhead due to many
+threads wasting CPU time spinning on the lock. Mutexes don't have this problem as
+they don't waste CPU time when they are waiting for the critical section.
+
+FILES:
+
+lab2_add.c:
+contains the program that implements the multi-threaded add program as specified
+in the spec.
+
+lab2_list.c:
+contains the program that implements the multi-threaded SortedList program as specified
+in the spec.
+
+SortedList.c:
+contains the program that implements the functions defined in SortedList.h
+
+SortedList.h:
+contains function definitions for operations on a doubly linked list
+
+lab2_add.csv and lab2_list.csv:
+contains the statistics outputted by lab2_add and lab2_list
+
+lab2_add.gp and lab2_list.gp:
+contains code that generates appropriate graphs for the data in the csv files
+
+.png files:
+the graphs generated by the two programs above
+
+
+Makefile:
+
+It contains 5 targets:
+
+build: compile all programs
+tests: run all (over 200) specified test cases to generate results in CSV files.
+graphs: runs tests and uses gnuplot(1) and the supplied data reduction scripts to generate the required graphs
+dist: cleans, builds, runs tests and creates the deliverable tarball
+clean: delete all programs and output created by the Makefile (except *png and *csv)
+
+README:
+
+The README contains descriptions for all the files and the sources
+I used.
+
+Sources:
+
+https://computing.llnl.gov/tutorials/pthreads/
+http://man7.org/linux/man-pages/man2/clock_gettime.2.html
+https://gcc.gnu.org/onlinedocs/gcc-4.4.3/gcc/Atomic-Builtins.html
+https://linux.die.net/man/1/gnuplot

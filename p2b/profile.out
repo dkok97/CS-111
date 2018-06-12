@@ -1,0 +1,132 @@
+Total: 1445 samples
+    1224  84.7%  84.7%     1226  84.8% lock
+     173  12.0%  96.7%      173  12.0% __strcmp_sse42
+      30   2.1%  98.8%      130   9.0% SortedList_lookup
+      12   0.8%  99.6%       86   6.0% SortedList_insert
+       2   0.1%  99.7%        2   0.1% __GI___clock_gettime
+       1   0.1%  99.8%        1   0.1% SortedList_length
+       1   0.1%  99.9%     1445 100.0% __clone
+       1   0.1%  99.9%        1   0.1% _init
+       1   0.1% 100.0%        1   0.1% hash_function
+       0   0.0% 100.0%     1444  99.9% start_thread
+       0   0.0% 100.0%     1444  99.9% thread_function
+ROUTINE ====================== lock in /u/cs/ugrad/dinkar/cs111/p2b/lab2_list.c
+  1224   1226 Total samples (flat / cumulative)
+     .      .   86:       hash = (hash * 10) + *cp++ - '0';
+     .      .   87:   return hash;
+     .      .   88: }
+     .      .   89: 
+     .      .   90: void lock(long h)
+---
+     .      .   91: {
+     .      .   92:   struct timespec start;
+     .      .   93:   struct timespec end;
+     .      .   94:   switch(lock_type)
+     .      .   95:   {
+     .      .   96:     case NO_LOCK:
+     .      .   97:       break;
+     .      .   98: 
+     .      .   99:     case SPIN_LOCK:
+     .      .  100:       if (clock_gettime(CLOCK_MONOTONIC, &start) < 0)
+     .      .  101:       {
+     .      .  102:         cmd_err = "clock_gettime";
+     .      .  103:         report_error(cmd_err);
+     .      .  104:       }
+     .      .  105: 
+  1224   1224  106:       while (__sync_lock_test_and_set(&all_lists[h].spin_lock_var, 1) == 1);
+     .      .  107: 
+     .      2  108:       if (clock_gettime(CLOCK_MONOTONIC, &end) < 0)
+     .      .  109:       {
+     .      .  110:         cmd_err = "clock_gettime";
+     .      .  111:         report_error(cmd_err);
+     .      .  112:       }
+     .      .  113:       total_lock_time_in_ns += time_elapsed(start, end);
+     .      .  114:       break;
+     .      .  115: 
+     .      .  116:     case MUTEX_LOCK:
+     .      .  117:       if (clock_gettime(CLOCK_MONOTONIC, &start) < 0)
+     .      .  118:       {
+     .      .  119:         cmd_err = "clock_gettime";
+     .      .  120:         report_error(cmd_err);
+     .      .  121:       }
+     .      .  122: 
+     .      .  123:       pthread_mutex_lock(&all_lists[h].mutex_var);
+     .      .  124: 
+     .      .  125:       if (clock_gettime(CLOCK_MONOTONIC, &end) < 0)
+     .      .  126:       {
+     .      .  127:         cmd_err = "clock_gettime";
+     .      .  128:         report_error(cmd_err);
+     .      .  129:       }
+     .      .  130:       total_lock_time_in_ns += time_elapsed(start, end);
+     .      .  131:       break;
+     .      .  132: 
+     .      .  133:     default:
+     .      .  134:       break;
+     .      .  135:   }
+     .      .  136: }
+---
+     .      .  137: 
+     .      .  138: void unlock(long h)
+     .      .  139: {
+     .      .  140:   switch(lock_type)
+     .      .  141:   {
+ROUTINE ====================== lock in /u/cs/ugrad/dinkar/cs111/p2b/lab2_list.c
+  1224   1226 Total samples (flat / cumulative)
+     .      .   86:       hash = (hash * 10) + *cp++ - '0';
+     .      .   87:   return hash;
+     .      .   88: }
+     .      .   89: 
+     .      .   90: void lock(long h)
+---
+     .      .   91: {
+     .      .   92:   struct timespec start;
+     .      .   93:   struct timespec end;
+     .      .   94:   switch(lock_type)
+     .      .   95:   {
+     .      .   96:     case NO_LOCK:
+     .      .   97:       break;
+     .      .   98: 
+     .      .   99:     case SPIN_LOCK:
+     .      .  100:       if (clock_gettime(CLOCK_MONOTONIC, &start) < 0)
+     .      .  101:       {
+     .      .  102:         cmd_err = "clock_gettime";
+     .      .  103:         report_error(cmd_err);
+     .      .  104:       }
+     .      .  105: 
+  1224   1224  106:       while (__sync_lock_test_and_set(&all_lists[h].spin_lock_var, 1) == 1);
+     .      .  107: 
+     .      2  108:       if (clock_gettime(CLOCK_MONOTONIC, &end) < 0)
+     .      .  109:       {
+     .      .  110:         cmd_err = "clock_gettime";
+     .      .  111:         report_error(cmd_err);
+     .      .  112:       }
+     .      .  113:       total_lock_time_in_ns += time_elapsed(start, end);
+     .      .  114:       break;
+     .      .  115: 
+     .      .  116:     case MUTEX_LOCK:
+     .      .  117:       if (clock_gettime(CLOCK_MONOTONIC, &start) < 0)
+     .      .  118:       {
+     .      .  119:         cmd_err = "clock_gettime";
+     .      .  120:         report_error(cmd_err);
+     .      .  121:       }
+     .      .  122: 
+     .      .  123:       pthread_mutex_lock(&all_lists[h].mutex_var);
+     .      .  124: 
+     .      .  125:       if (clock_gettime(CLOCK_MONOTONIC, &end) < 0)
+     .      .  126:       {
+     .      .  127:         cmd_err = "clock_gettime";
+     .      .  128:         report_error(cmd_err);
+     .      .  129:       }
+     .      .  130:       total_lock_time_in_ns += time_elapsed(start, end);
+     .      .  131:       break;
+     .      .  132: 
+     .      .  133:     default:
+     .      .  134:       break;
+     .      .  135:   }
+     .      .  136: }
+---
+     .      .  137: 
+     .      .  138: void unlock(long h)
+     .      .  139: {
+     .      .  140:   switch(lock_type)
+     .      .  141:   {

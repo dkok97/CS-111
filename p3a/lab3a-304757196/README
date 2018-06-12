@@ -1,0 +1,44 @@
+NAME: Dinkar Khattar
+EMAIL: dinkarkhattar@ucla.edu
+ID: 204818138
+
+lab1b-client.c:
+
+It contains the source code of my client program.
+It initiates a socket connection to a server listening on the specified port
+and manages the appropriate communication.
+It also accepts a --log option to log the messages across the socket
+and a --debug option to print statements to stderr to help me debug
+and a --compress option that uses zlib to compress the messages.
+
+lab1b-server.c:
+It contains the source code of my server program.
+It accepts a socket connection from a client and listens on the specified port
+and manages the appropriate communication.
+It accepts the input from a client, and send the data to a forked child
+that is running bash
+It accepts a --debug option to print statements to stderr to help me debug
+and a --compress option that uses zlib to compress the messages.
+
+Makefile:
+
+It contains 3 targets:
+
+default: builds the program lab1b-client.c and lab1b-server.c with appropriate flags
+clean: deletes the file created by dist and default
+dist: creates a tarball for distribution
+
+README:
+
+The README contains descriptions for all the files and the sources
+I used.
+
+Sources:
+
+https://www.tutorialspoint.com/unix_sockets/socket_server_example.htm
+https://www.tutorialspoint.com/unix_sockets/socket_client_example.htm
+https://linux.die.net/man/3/creat
+https://www.zlib.net/manual.html
+https://www.zlib.net/zlib_how.html
+https://linux.die.net/man/2/kill
+http://man7.org/linux/man-pages/man7/signal.7.html

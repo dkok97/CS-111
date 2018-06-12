@@ -1,0 +1,39 @@
+NAME: Dinkar Khattar
+EMAIL: dinkarkhattar@ucla.edu
+ID: 204818138
+
+Serial Number: BBGW16052444
+WIFI MAC Address: 2CF7F1061318
+
+my_beaglebone.jpg:
+
+A selfie of this handsome dude holding the beaglebone
+
+connected.png:
+
+Screenshot of a USB terminal command session int terminal,
+showing that I gave it the system a name (204818138) and configured network access (ifconfig output).
+
+copy.png:
+
+A SSH session in cyberduck where I copy my hello.c to the beaglebone.
+
+build_run.png:
+
+I SSH into the beaglebone and complile and run my program.
+
+git.png:
+
+I install git and clone a repo from my github.
+
+README:
+
+The README contains descriptions for all the files and the sources
+I used.
+
+Sources:
+
+https://drive.google.com/drive/folders/0B6dyEb8VXZo-YjZXUE9YTjhCM0k
+https://drive.google.com/drive/folders/0B6dyEb8VXZo-T3VybUs2WTd4VFE
+https://drive.google.com/drive/folders/0B6dyEb8VXZo-NzZwb1gzNTRvLXc
+https://drive.google.com/drive/folders/0B6dyEb8VXZo-N3hVcVI0UFpWSVkß

@@ -1,0 +1,22 @@
+NAME: Dinkar Khattar, Suyash Saxena
+EMAIL: dinkarkhattar@ucla.edu, suyashs@ucla.edu
+ID: 204818138, 404735401
+
+Files included:
+
+1. lab3a.c: A C source implementation that analyzes characteristics of files and directories in an EXT2 file system image.
+2. Makefile: Targets for trivial default, dist and clean operations.
+3. This README
+
+Sources referenced:
+- The Second Extended File System, Dave Poirier: http://www.nongnu.org/ext2-doc/ext2.html
+- Analyzing a filesystem, Smith College: http://homepage.smc.edu/morgan_david/cs40/analyze-ext2.htm
+
+Limitations:
+- Assumes that input images will contain at most 1 group
+
+Source:
+
+-https://linux.die.net/man/8/debugfs
+-http://www.nongnu.org/ext2-doc/ext2.html
+-http://cs.smith.edu/~nhowe/262/oldlabs/ext2.html

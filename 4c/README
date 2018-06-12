@@ -1,0 +1,35 @@
+NAME: Dinkar Khattar
+EMAIL: dinkarkhattar@ucla.edu
+ID: 204818138
+
+lab4c_tsp.c:
+
+Contains my implementation for the program and a dummy definition incase a
+beaglebone isn't connected.
+
+lab4c_tls.c:
+
+Contains my implementation for the program with SSL and a dummy definition incase a
+beaglebone isn't connected.
+
+Makefile:
+
+This contains targets to compile, check, clean, and create a
+tarball.
+It compiles the source code uses GCC with appropriate flags.
+The check target cleans, compiles and checks the executables.
+The dist target creates a tarball with the source codes, the Makefile
+and the screenshots.
+The testing done for this program was very simple. I did not test
+it too rigorously with any corner cases.
+The checks I included are:
+
+README:
+
+The README contains descriptions for all the files and the sources
+I used.
+
+Sources:
+
+https://stackoverflow.com/questions/7698488/turn-a-simple-socket-into-an-ssl-socket
+https://linux.die.net/man/3/ssl
